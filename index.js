@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3333;
+const port = 3334;
 
 app.use(bodyParser.json());
 
@@ -27,13 +27,13 @@ app.get('/getCode', (req, res) => {
 });
 
 app.post('/addCode', (req, res) => {
-  const newItem = req.body.item;
-  if (typeof newItem === 'string' && newItem.length === 10) {
-    itemList.push(newItem);
-    res.send('Code đã được thêm vào danh sách');
-  } else {
-    res.status(400).send('Yêu cầu code có độ dài 10 kí tự');
-  }
+  const newCode = req.query.code;
+    if (typeof newCode === 'string' && newCode.length === 10) {
+        itemList.push(newCode);
+        res.send('Code đã được thêm vào danh sách');
+    } else {
+        res.status(400).send('Yêu cầu code dạng string có độ dài 10 kí tự');
+    }
 });
 
 app.listen(port, () => {
